@@ -1,0 +1,31 @@
+{
+  "name": "bt-stream",
+  "version": "0.0.0",
+  "description": "bittorrent read-stream implementation without writing to storage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/torrent-proxy/bt-stream.git"
+  },
+  "keywords": [
+    "bittorrent",
+    "stream"
+  ],
+  "author": "reeFridge",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/torrent-proxy/bt-stream/issues"
+  },
+  "homepage": "https://github.com/torrent-proxy/bt-stream#readme",
+  "dependencies": {
+    "bitfield": "^2.0.0",
+    "bittorrent-dht": "^8.1.0",
+    "bncode": "^0.5.3",
+    "hat": "0.0.3",
+    "parse-torrent": "^5.8.3",
+    "peer-wire-swarm": "^0.12.1"
+  }
+}
