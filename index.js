@@ -30,6 +30,9 @@ const fs = require('fs');
 
 			const fsWriteStream = fs.WriteStream('/tmp/123');
 			rs.pipe(fsWriteStream);
+			rs.on('error', (err) => console.error('err', err));
+			rs.on('data', () => ({}))
+			// setInterval(() => console.log('rs', rs), 5000);
 		});
 // });
 
