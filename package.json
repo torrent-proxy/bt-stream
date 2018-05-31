@@ -4,7 +4,7 @@
   "description": "bittorrent read-stream implementation without writing to storage",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive --timeout 15000"
   },
   "repository": {
     "type": "git",
@@ -21,10 +21,15 @@
   },
   "homepage": "https://github.com/torrent-proxy/bt-stream#readme",
   "dependencies": {
+    "@types/chai": "4.1.2",
+    "@types/mocha": "2.2.48",
     "bitfield": "^2.0.0",
     "bittorrent-dht": "^8.1.0",
     "bncode": "^0.5.3",
+    "chai": "4.1.2",
+    "color": "^3.0.0",
     "hat": "0.0.3",
+    "mocha": "5.0.4",
     "parse-torrent": "^5.8.3",
     "peer-wire-swarm": "^0.12.1"
   }
