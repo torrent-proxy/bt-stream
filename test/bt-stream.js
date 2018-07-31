@@ -3,11 +3,12 @@ const Readeble = require('stream').Readable;
 
 const BTStream = require('../index');
 
+const DHT_PORT = 8080;
 const HASH = '1d805df84b254a9317ef5a6bf702bf7da77445fa';
 
 let btStream = null;
 
-test.beforeEach((t) => t.context.btStream = new BTStream());
+test.beforeEach((t) => t.context.btStream = new BTStream({ dhtPort: DHT_PORT}));
 test.afterEach((t) => t.context.btStream.destroy());
 
 test('create', (t) => {
