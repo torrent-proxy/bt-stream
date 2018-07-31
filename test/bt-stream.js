@@ -17,19 +17,19 @@ test('create', (t) => {
 	t.true(btStream instanceof BTStream);
 });
 
-test('должен удовлетворять интерфейсу', (t) => {
+test('Should implement the interface', (t) => {
 	const { btStream } = t.context;
 	t.is(typeof btStream.destroy, 'function');
 	t.is(typeof btStream.downloadTorrent, 'function');
 	t.is(typeof btStream.getMetaData, 'function');
 });
 
-test.serial('должен получить метадату', async (t) => {
+test.serial('Should get metadata', async (t) => {
 	const torrent = await t.context.btStream.getMetaData(HASH);
 	t.true(typeof torrent === 'object' && torrent !== null);
 });
 
-test.serial('должен получить ридстрим для скачивания', async (t) => {
+test.serial('Should get read stream with file', async (t) => {
 	const { btStream } = t.context;
 	const torrent = await btStream.getMetaData(HASH);
 	const stream = await btStream.downloadTorrent(torrent);
