@@ -21,6 +21,6 @@ console.log('hash=', torrent.infoHash);
 
 const readStream = await btStream.downloadTorrent(torrent);
 
-const writeStream = createWriteStream(FILE_PATH);
+const writeStream = fs.createWriteStream(FILE_PATH);
 readStream.pipe(writeStream);
 ```
