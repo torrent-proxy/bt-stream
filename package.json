@@ -1,8 +1,11 @@
 {
   "name": "bt-stream",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "bittorrent read-stream implementation without writing to storage",
   "main": "index.js",
+  "engines": {
+    "node" : ">=10.0.0"
+  },
   "scripts": {
     "test": "ava test/bt-stream.js"
   },
