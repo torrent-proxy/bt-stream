@@ -1,4 +1,4 @@
-import test from 'ava';
+const test = require('ava');
 const Readeble = require('stream').Readable;
 
 const BTStream = require('../index');
@@ -31,10 +31,19 @@ test.serial('Should get metadata', async (t) => {
 
 test.serial('Should get read stream with file', async (t) => {
 	const { btStream } = t.context;
+
 	const torrent = await btStream.getMetaData(HASH);
-	const stream = await btStream.downloadTorrent(torrent);
+    const file = torrent.files[0];
 
-	t.true(stream instanceof Readeble);
+	const stream = btStream.downloadFile({torrent, file});
 
-	stream.destroy();
+    t.true(stream instanceof Readeble);
+});
+
+test.skip('Should get read stream with file by name', (t) => {
+    // const stream = await btStream.downloadFileByName({torrent, name});
+});
+
+test.skip('Should get read stream with file by path', (t) => {
+    // const stream = await btStream.downloadFileByPath({torrent, path});
 });
