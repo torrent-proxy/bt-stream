@@ -1,15 +1,18 @@
 const test = require('ava');
 const Readeble = require('stream').Readable;
+const fs = require('fs');
 
 const BTStream = require('../index');
 
 const DHT_PORT = 8080;
-const HASH = 'C7A4BC4FD5263E80CDFE8C79DE0305AFFCC15C79';
+// const HASH = '30FE875E6188FD5ADFACBFBC93300D27D7461AAE';
+const HASH = '2dca8e028d7ff766162a9cbc2002ce8c6ca04555';
+// const HASH = 'cb54c5f53e2b4bacdadb2d44293b9cae4df69790';
 
 let btStream = null;
 
 test.beforeEach((t) => t.context.btStream = new BTStream({ dhtPort: DHT_PORT }));
-test.afterEach((t) => t.context.btStream.destroy());
+// test.afterEach((t) => t.context.btStream.destroy());
 
 test('create', (t) => {
 	const { btStream } = t.context;
@@ -33,11 +36,66 @@ test.serial('Should get read stream with file', async (t) => {
 	const { btStream } = t.context;
 
 	const torrent = await btStream.getMetaData(HASH);
-    const file = torrent.files[0];
+	const file = torrent.files[0];
 
 	const stream = btStream.downloadFile({torrent, file});
 
-    t.true(stream instanceof Readeble);
+	t.true(stream instanceof Readeble);
+
+	stream.destroy();
+});
+
+test.serial('Should load file two match', async (t) => {
+	return new Promise(async (resolve) => {
+		const { btStream } = t.context;
+
+		const torrentOne = await btStream.getMetaData(HASH);
+		const torrentTwo = await btStream.getMetaData(HASH);
+
+		t.true(true);
+		resolve();
+	});
+});
+
+test.serial.only('Should load file', async (t) => {
+	return new Promise(async (resolve) => {
+		const { btStream } = t.context;
+
+		const torrent = await btStream.getMetaData(HASH);
+		const file = torrent.files[0];
+
+		const stream = btStream.downloadFile({torrent, file});
+		const wstream = fs.createWriteStream(`./test-file`);
+
+		stream.pipe(wstream);
+		stream.on('end', () => {
+			console.log(`END!!!`);
+			t.true(true);
+			resolve();
+		});
+	});
+});
+
+
+test.serial.skip('Should get read all', async (t) => {
+	global.console.log = () => {};
+
+	const { btStream } = t.context;
+
+	const torrent = await btStream.getMetaData(HASH);
+	const file = torrent.files[0];
+	console.log('files', torrent.files.length);
+
+	const stream = btStream.downloadTorrent({torrent, file});
+	const wstream = fs.createWriteStream(`./test-file`);
+
+	stream.pipe(wstream);
+	stream.on('end', () => {
+		console.log('END!!!!!');
+		stream.destroy();
+	});
+
+	return new Promise(() => {});
 });
 
 test.skip('Should get read stream with file by name', (t) => {
