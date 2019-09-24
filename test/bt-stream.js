@@ -2,16 +2,16 @@ const test = require('ava');
 const Readeble = require('stream').Readable;
 const fs = require('fs');
 
-const BTStream = require('../index');
+const {createBTStream, BTStream} = require('../index');
 
 const DHT_PORT = 8080;
-// const HASH = '30FE875E6188FD5ADFACBFBC93300D27D7461AAE';
-const HASH = '2dca8e028d7ff766162a9cbc2002ce8c6ca04555';
+const HASH = '30FE875E6188FD5ADFACBFBC93300D27D7461AAE';
+// const HASH = '2dca8e028d7ff766162a9cbc2002ce8c6ca04555';
 // const HASH = 'cb54c5f53e2b4bacdadb2d44293b9cae4df69790';
 
 let btStream = null;
 
-test.beforeEach((t) => t.context.btStream = new BTStream({ dhtPort: DHT_PORT }));
+test.beforeEach((t) => t.context.btStream = createBTStream({dhtPort: DHT_PORT, hash: HASH}));
 // test.afterEach((t) => t.context.btStream.destroy());
 
 test('create', (t) => {
@@ -59,9 +59,11 @@ test.serial('Should load file two match', async (t) => {
 
 test.serial.only('Should load file', async (t) => {
 	return new Promise(async (resolve) => {
-		const { btStream } = t.context;
+		const btStream = createBTStream({dhtPort: 8900, hash: HASH});
 
+		console.log(`create btstream`, {btStream});
 		const torrent = await btStream.getMetaData(HASH);
+		console.log(`get metadata`);
 		const file = torrent.files[0];
 
 		const stream = btStream.downloadFile({torrent, file});

@@ -30,7 +30,6 @@
     "bittorrent-dht": "^8.1.0",
     "bncode": "^0.5.3",
     "chai": "4.1.2",
-    "color": "^3.0.0",
     "hat": "0.0.3",
     "parse-torrent": "^5.8.3",
     "peer-wire-swarm": "^0.12.1"
