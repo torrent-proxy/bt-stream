@@ -4,9 +4,14 @@ const hat = require('hat');
 const {Swarm} = require('./lib/swarm/swarm');
 const BTStream = require('./lib/bt-stream');
 
-const createBTStream = ({dhtPort, hash}) => {
+const createBTStream = ({dhtPort, hash: _hash}) => {
 	const dht = new DHT();
 	const id = '-FRIDGE-' + hat(48);
+
+	let hash = _hash;
+	if (hash.includes(`magnet:?xt=urn:btih:`)) {
+		hash = hash.substr(`magnet:?xt=urn:btih:`.length);
+	}
 
 	const peerSwarm = new peerWireSwarm(hash, id, {size: 1000, speed: 10});
 
