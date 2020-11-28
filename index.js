@@ -1,7 +1,7 @@
 const DHT = require('bittorrent-dht');
 const peerWireSwarm = require('peer-wire-swarm');
 const hat = require('hat');
-const {Swarm} = require('./lib/swarm/swarm');
+const {Swarm} = require('./lib/swarm');
 const BTStream = require('./lib/bt-stream');
 
 const createBTStream = ({dhtPort, hash: _hash}) => {
