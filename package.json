@@ -25,7 +25,7 @@
   "homepage": "https://github.com/torrent-proxy/bt-stream#readme",
   "dependencies": {
     "bitfield": "^2.0.0",
-    "bittorrent-dht": "^8.1.0",
+    "bittorrent-dht": "10.0.0",
     "bncode": "^0.5.3",
     "hat": "0.0.3",
     "parse-torrent": "^5.8.3",
